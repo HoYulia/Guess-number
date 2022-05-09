@@ -1,0 +1,45 @@
+from random import randint
+print('Добро пожаловать в числовую угадайку')
+play = True
+while play == True:
+    print('В каком диапазоне будем угадывать число?')
+    print('Укажи границу от 1 до ...')
+    limit = int(input())
+    print('Отлично!')
+    rnd = randint(1, limit)
+    print(f'Отгадай число от 1 до {limit}')
+    def is_valid_guess_num():
+        if 1 <= int(guess_num) <= limit:
+            return True
+        else:
+            print(f'Дружище так не пойдет, введи целое число от 1 до {limit}?')  
+            return False   
+    count = 0
+    while True:
+        guess_num = int(input())
+        if is_valid_guess_num() == True:
+            if guess_num == rnd:
+                count += 1
+                print(f'Ура! Ты угадал за {count} попыток, поздравляем!')
+                break
+            elif guess_num < rnd and (rnd - guess_num) <= 5:
+                print('Твое число меньше загаданного, но уже ооочень горячо! Попробуйте еще разок')
+                count += 1
+            elif guess_num < rnd and (rnd - guess_num) > 5:
+                print('Твое число меньше загаданного, ты далек от него - холодно, бррр! Попробуйте еще разок')
+                count += 1
+            elif guess_num > rnd and  (guess_num - rnd) <= 5:
+                print('Твое число больше загаданного, но уже ооочень горячо! Попробуйте еще разок')
+                count += 1                                
+            else:
+                print('Твое число больше загаданного, ты далек от него - холодно, бррр! Попробуйте еще разок')
+                count += 1
+                 
+    print('Хочешь сыграть еще разок? (Да, Нет)')
+    anw = input()
+    if anw.lower() == 'да':
+        play = True
+        print('Поехали!')
+    else: 
+        print('Встретимся в другой раз!')
+        play = False
